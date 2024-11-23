@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.LoginBean;
 import com.example.demo.service.LoginService;
@@ -23,8 +24,11 @@ public class LoginController {
     // 顯示登入頁面
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login";  // 返回login.html頁面
+    	
+    	
+    	return "login";  // 返回login.html頁面
     }
+
 	
  // 用戶登入處理
     @PostMapping("/login")
@@ -60,5 +64,7 @@ public class LoginController {
         }
     }
 }
+
+
 
     
