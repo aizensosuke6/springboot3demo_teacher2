@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import com.example.demo.model.LoginBean;
 import com.example.demo.service.LoginService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -63,6 +64,20 @@ public class LoginController {
             return ResponseEntity.ok("{\"success\": false}");
         }
     }
+    
+    //登出
+    @GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		// 獲取當前 session，false 表示如果 session 不存在則不創建新的 session
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+            // 使 session 無效，這樣就登出了
+            session.invalidate();
+        }
+		// 重定向到登入頁面
+        return "redirect:/login"; // 重定向到登入頁面
+	}
+    
 }
 
 
