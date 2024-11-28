@@ -9,5 +9,5 @@ import com.example.demo.model.LoginBean;
 @Repository
 public interface LoginRepository extends JpaRepository<LoginBean, Integer> {
 	// 自定義方法，用於根據 email 和密碼查詢用戶
-	LoginBean findByUserACAndPassword(String userAC, String password);
+	LoginBean findByUserEmailAndUserPassword(String userEmail, String userPassword);
 }

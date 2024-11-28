@@ -25,19 +25,19 @@ public class RegisterController {
     }
 	
 	@PostMapping("/register")
-	public String register(	@RequestParam String userAC,
-							@RequestParam String password,		
-							@RequestParam String username,		
-							@RequestParam String userphone,		
-							@RequestParam String idCard,		
-							@RequestParam String userbirthday) {
+	public String register(	@RequestParam String userEmail,
+							@RequestParam String userPassword,		
+							@RequestParam String userName,		
+							@RequestParam String userTel,		
+							@RequestParam String userIdNumber,		
+							@RequestParam String userBirthday) {
 	RegisterBean user = new RegisterBean();
-	user.setUserAC(userAC);
-	user.setPassword(password);
-	user.setUsername(username);
-	user.setUserphone(userphone);
-	user.setIdCard(idCard);
-	user.setUserbirthday(userbirthday);
+	user.setUserEmail(userEmail);
+	user.setUserPassword(userPassword);
+	user.setUserName(userName);
+	user.setUserTel(userTel);
+	user.setUserIdNumber(userIdNumber);
+	user.setUserBirthday(userBirthday);
 	
 	boolean success = registerService.registerUser(user);
 	if(success) {

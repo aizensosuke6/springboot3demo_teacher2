@@ -2,92 +2,92 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "users")
+@Table(name = "userInfo")
 public class LoginBean {
 
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int userId;
 
-	 	@Column(name = "userAC")  // 這裡改為 "userAC"，對應資料庫欄位
-	    private String userAC;  // 改為 userAC，與資料庫欄位名稱匹配
+	@Column(name = "userEmail") // 這裡改為 "userAC"，對應資料庫欄位
+	private String userEmail; // 改為 userAC，與資料庫欄位名稱匹配
 
-	    @Column(name = "password")
-	    private String password;
+	@Column(name = "userPassword")
+	private String userPassword;
 
-	    @Column(name = "username")
-	    private String username;
+	@Column(name = "userName")
+	private String userName;
 
-	    @Column(name = "userphone")
-	    private String userphone;
+	@Column(name = "userTel")
+	private String userTel;
 
-	    @Column(name = "idCard")
-	    private String idCard;
+	@Column(name = "userIdNumber")
+	private String userIdNumber;
 
-	    @Column(name = "userbirthday")
-	    private String userbirthday;
-	    
-	 // 無參構造函數（JPA 要求）
-	    public LoginBean() {
-	    }
-	
-	    // Getters and Setters
-	    public int getId() {
-	        return id;
-	    }
+	@Column(name = "userBirthday")
+	private String userBirthday;
 
-	    public void setId(int id) {
-	        this.id = id;
-	    }
+	// 無參構造函數（JPA 要求）
+	public LoginBean() {
+	}
 
-	    public String getUserAC() {
-	        return userAC;  // 這裡的 getter 也應該是 userAC
-	    }
+	// Getters and Setters
 
-	    public void setUserAC(String userAC) {
-	        this.userAC = userAC;  // 這裡的 setter 也應該是 userAC
-	    }
+	public int getUserId() {
+		return userId;
+	}
 
-	    public String getPassword() {
-	        return password;
-	    }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-	    public void setPassword(String password) {
-	        this.password = password;
-	    }
+	public String getUserEmail() {
+		return userEmail;
+	}
 
-	    public String getUsername() {
-	        return username;
-	    }
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 
-	    public void setUsername(String username) {
-	        this.username = username;
-	    }
+	public String getUserPassword() {
+		return userPassword;
+	}
 
-	    public String getUserphone() {
-	        return userphone;
-	    }
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
 
-	    public void setUserphone(String userphone) {
-	        this.userphone = userphone;
-	    }
+	public String getUserName() {
+		return userName;
+	}
 
-	    public String getIdCard() {
-	        return idCard;
-	    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-	    public void setIdCard(String idCard) {
-	        this.idCard = idCard;
-	    }
+	public String getUserTel() {
+		return userTel;
+	}
 
-	    public String getUserbirthday() {
-	        return userbirthday;
-	    }
+	public void setUserTel(String userTel) {
+		this.userTel = userTel;
+	}
 
-	    public void setUserbirthday(String userbirthday) {
-	        this.userbirthday = userbirthday;
-	    }
-	
+	public String getUserIdNumber() {
+		return userIdNumber;
+	}
+
+	public void setUserIdNumber(String userIdNumber) {
+		this.userIdNumber = userIdNumber;
+	}
+
+	public String getUserBirthday() {
+		return userBirthday;
+	}
+
+	public void setUserBirthday(String userBirthday) {
+		this.userBirthday = userBirthday;
+	}
+
 }

@@ -67,34 +67,34 @@
         <br>
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingUserAc" placeholder="會員帳號(email)" name="userAC" required> <!-- 輸入區塊 -->
+          <input type="text" class="form-control" id="floatingUserAc" placeholder="會員帳號(email)" name="userEmail" required> <!-- 輸入區塊 -->
           <label for="floatingUserAc">會員帳號(email)</label>
         </div>
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingUserName" placeholder="會員姓名" name="username" required><!-- 輸入區塊 -->
+          <input type="text" class="form-control" id="floatingUserName" placeholder="會員姓名" name="userName" required><!-- 輸入區塊 -->
           <label for="floatingUserName">會員姓名</label>
         </div>
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingIdCard" placeholder="身分證字號" name="idCard" required><!-- 輸入區塊 -->
+          <input type="text" class="form-control" id="floatingIdCard" placeholder="身分證字號" name="userIdNumber" required><!-- 輸入區塊 -->
           <label for="floatingIdCard">身分證字號</label>
         </div>
         
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="密碼" name="password" required><!-- 輸入區塊 -->
+          <input type="password" class="form-control" id="floatingPassword" placeholder="密碼" name="userPassword" required><!-- 輸入區塊 -->
           <label for="floatingPassword">密碼</label>
         </div>
 
         
         
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingUserbirthday" placeholder="生日格式(YYYY-MM-DD)" name=userbirthday required><!-- 輸入區塊 -->
+          <input type="text" class="form-control" id="floatingUserbirthday" placeholder="生日格式(YYYY-MM-DD)" name=userBirthday required><!-- 輸入區塊 -->
           <label for="floatingUserbirthday">生日</label>
         </div>
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingPhone" placeholder="電話號碼" name="userphone" required><!-- 輸入區塊 -->
+          <input type="text" class="form-control" id="floatingPhone" placeholder="電話號碼" name="userTel" required><!-- 輸入區塊 -->
           <label for="floatingPhone">電話號碼</label>
         </div>
 
@@ -134,26 +134,26 @@
             $('#registerForm').on('submit', function(e) {
                 e.preventDefault();
 
-                const userAC = $('#floatingUserAc').val().trim();
+                const userEmail = $('#floatingUserAc').val().trim();
                 const userName = $('#floatingUserName').val().trim();
-                const idCard = $('#floatingIdCard').val().trim();
-                const password = $('#floatingPassword').val().trim();
-                const userbirthday = $('#floatingUserbirthday').val().trim();
+                const userIdNumber = $('#floatingIdCard').val().trim();
+                const userPassword = $('#floatingPassword').val().trim();
+                const userBirthday = $('#floatingUserbirthday').val().trim();
                 const userTel = $('#floatingPhone').val().trim();
 				
              // 簡單的驗證：檢查所有欄位是否填寫
-                if(!userAC || !userName || !idCard || !password || !userbirthday || !userTel){
+                if(!userEmail || !userName || !userIdNumber || !userPassword || !userPassword || !userTel){
                 	alert('請填寫所有欄位');
                 	return;// 阻止表單提交
                 }
                 
                 $.post('/register', {
-                	userAC: userAC,
-                    username: userName,
-                    idCard: idCard,
-                    password: password,
-                    userbirthday: userbirthday,
-                    userphone: userTel,
+                	userEmail: userEmail,
+                    userName: userName,
+                    userIdNumber: userIdNumber,
+                    userPassword: userPassword,
+                    userBirthday: userBirthday,
+                    userTel: userTel,
                     action: 'add'
                 }).done(function(data) {
                     alert("會員資料註冊成功！");

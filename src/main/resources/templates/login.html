@@ -89,11 +89,11 @@
     <form id="loginForm" th:action="@{/login}" method="post">
       <h1 class="h3 mb-3 fw-normal">會員登入</h1>
       <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="userAC" required>
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="userEmail" required>
         <label for="floatingInput">電子郵件地址(帳號)</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPassword" required>
         <label for="floatingPassword">密碼</label>
       </div>
 
@@ -228,10 +228,10 @@
       $('#loginForm').on('submit', function (e) {
         e.preventDefault();
 
-        var email = $('#floatingInput').val().trim();
-        var password = $('#floatingPassword').val().trim();
+        var userEmail = $('#floatingInput').val().trim();
+        var userPassword = $('#floatingPassword').val().trim();
 
-        if (!email || !password) {
+        if (!userEmail || !userPassword) {
             alert('請填寫所有欄位');
             return;
           }
@@ -239,7 +239,7 @@
         $.ajax({
           url: '/login',
           type: 'POST',
-          data: { userAC: email, password: password },
+          data: { userEmail: userEmail, userPassword: userPassword },
           success: function (response) {
             if (response === 'success') {
               window.location.href = '/memberCenter'; // 登入成功後跳轉

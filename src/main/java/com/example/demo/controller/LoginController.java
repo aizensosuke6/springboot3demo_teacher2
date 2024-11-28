@@ -34,9 +34,9 @@ public class LoginController {
  // 用戶登入處理
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<String> login(@RequestParam String userAC, @RequestParam String password, HttpSession session) {
+    public ResponseEntity<String> login(@RequestParam String userEmail, @RequestParam String userPassword, HttpSession session) {
         // 驗證登入
-        LoginBean user = loginService.authenticate(userAC, password);
+        LoginBean user = loginService.authenticate(userEmail, userPassword);
 
         if (user != null) {
         	// 登入成功，將用戶信息放入 session
@@ -59,7 +59,7 @@ public class LoginController {
     public ResponseEntity<String> getUserInfo(HttpSession session) {
         LoginBean user = (LoginBean) session.getAttribute("user");
         if (user != null) {
-            return ResponseEntity.ok("{\"success\": true, \"username\": \"" + user.getUsername() + "\", \"userEmail\": \"" + user.getUserAC() + "\"}");
+            return ResponseEntity.ok("{\"success\": true, \"username\": \"" + user.getUserName() + "\", \"userEmail\": \"" + user.getUserEmail() + "\"}");
         } else {
             return ResponseEntity.ok("{\"success\": false}");
         }

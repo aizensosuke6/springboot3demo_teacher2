@@ -13,17 +13,17 @@ public class LoginService {
 	@Autowired
 	private LoginRepository loginRepository;
 	
-	public LoginBean authenticate(String userAC, String password) {
+	public LoginBean authenticate(String userEmail, String userPassword) {
 		// 日誌輸出
-	    System.out.println("Authenticating user: " + userAC + " with password: " + password);
+	    System.out.println("Authenticating user: " + userEmail + " with password: " + userPassword);
 	 // 查詢資料庫以驗證用戶
-        LoginBean user = loginRepository.findByUserACAndPassword(userAC, password);
+        LoginBean user = loginRepository.findByUserEmailAndUserPassword(userEmail, userPassword);
         if (user != null) {
             // 如果找到了匹配的用戶，輸出用戶信息
-            System.out.println("User found: " + user.getUserAC());
+            System.out.println("User found: " + user.getUserEmail());
         } else {
             // 如果沒有找到匹配的用戶，輸出錯誤信息
-            System.out.println("No user found with userAC: " + userAC);
+            System.out.println("No user found with userAC: " + userEmail);
         }
 	
         return user;
