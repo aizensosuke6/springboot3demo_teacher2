@@ -2,10 +2,14 @@ package com.example.demo.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.RegisterBean;
@@ -24,26 +28,19 @@ public class RegisterController {
         return "register";  // 返回register.html頁面
     }
 	
-	@PostMapping("/register")
-	public String register(	@RequestParam String userEmail,
-							@RequestParam String userPassword,		
-							@RequestParam String userName,		
-							@RequestParam String userTel,		
-							@RequestParam String userIdNumber,		
-							@RequestParam String userBirthday) {
-	RegisterBean user = new RegisterBean();
-	user.setUserEmail(userEmail);
-	user.setUserPassword(userPassword);
-	user.setUserName(userName);
-	user.setUserTel(userTel);
-	user.setUserIdNumber(userIdNumber);
-	user.setUserBirthday(userBirthday);
-	
-	boolean success = registerService.registerUser(user);
-	if(success) {
-		return "redirect:/login";// 註冊成功後重定向到登入頁面
-	}else {
-		return "register";// 若註冊失敗，返回註冊頁面
-	}
-	}
+ // 處理註冊表單
+    @PostMapping("/register")
+    public String register(@RequestBody RegisterBean user, Model model) {
+        // 呼叫Service層的registerUser方法，返回錯誤訊息列表
+        List<String> errors = registerService.registerUser(user);
+
+        // 如果有錯誤，將錯誤訊息放入model並返回註冊頁面
+        if(!errors.isEmpty()) {
+            model.addAttribute("errors", errors);
+            return "register";  // 若註冊失敗，返回註冊頁面並顯示錯誤
+        }
+
+        // 若註冊成功，重定向到登入頁面
+        return "redirect:/login";
+    }
 }
