@@ -75,6 +75,24 @@
       color: #856404;
       border: none;
     }
+    
+    .form-floating {
+  	  position: relative; /* 確保按鈕能相對輸入框定位 */
+	}
+
+	.toggle-password-btn {
+  	  position: absolute;
+  	  top: 0;
+  	  right: 0;
+  	  height: 100%; /* 按鈕高度與輸入框相同 */
+  	  border-top-left-radius: 0; /* 移除按鈕左上角圓角 */
+  	  border-bottom-left-radius: 0; /* 移除按鈕左下角圓角 */
+	}
+
+	#floatingPassword {
+  	  padding-right: 100px; /* 預留空間給顯示密碼按鈕 */
+	}
+    
 
   </style>
 
@@ -85,18 +103,35 @@
   <!-- 引入 userHeader -->
     <div th:replace="~{layout/userLoginHeader}"></div>
 
+	<br>
   <main class="form-signin">
-    <form id="loginForm" th:action="@{/login}" method="post">
+    <form id="loginForm"  th:action="@{/login}" method="post" >
       <h1 class="h3 mb-3 fw-normal">會員登入</h1>
       <div class="form-floating mb-3">
         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="userEmail" required>
         <label for="floatingInput">電子郵件地址(帳號)</label>
+      	
       </div>
       <div class="form-floating mb-3">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPassword" required>
         <label for="floatingPassword">密碼</label>
+        
+        <!--VV開發者測試功能VV-->
+        <button type="button" id="togglePassword" class="btn btn-outline-secondary position-absolute toggle-password-btn">
+    	<i class="bi bi-eye"></i>
+  		</button>
+  		<!--^^正式上線要刪除^^-->
       </div>
-
+      <div>
+      	<label>
+        <input type="checkbox" id="rememberMe"> 記住帳號
+    	</label>
+      </div>
+      <br>
+      <div>
+      <button type="button" id="devFillButton" class="btn btn-info">開發者專用：自動填入帳密</button>
+      </div>
+      <br>
       <button class="w-100 btn btn-lg btn-warning" type="submit">登入</button>
       <hr>
       <button class="w-100 btn btn-lg btn-warning" type="button" id="registerButton">立即註冊</button>
@@ -177,7 +212,59 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+  
+  
+  
+  
     $(document).ready(function () {
+        
+    // 頁面加載時，從 LocalStorage 中讀取帳號
+    const savedUserEmail = localStorage.getItem('useremail');
+    const rememberMeChecked = localStorage.getItem('rememberMe') === 'true';
+
+    // 如果勾選了記住帳號，並且存在存儲的帳號，則自動填充帳號欄位
+    if (rememberMeChecked) {
+        $('#floatingInput').val(savedUserEmail || '');
+        $('#rememberMe').prop('checked', true);
+    }
+    
+    // 當帳號欄位或記住帳號選項改變時，更新 LocalStorage
+    $('#floatingInput, #rememberMe').on('input change', function () {
+        var userEmail = $('#floatingInput').val().trim();
+        var rememberMe = $('#rememberMe').is(':checked');
+        
+        if (rememberMe) {
+            localStorage.setItem('useremail', userEmail);  // 儲存帳號
+            localStorage.setItem('rememberMe', 'true');    // 記住帳號狀態
+        } else {
+            localStorage.removeItem('useremail');  // 如果未勾選，則移除帳號
+            localStorage.setItem('rememberMe', 'false'); // 更新記住帳號狀態
+        }
+    });
+    
+    
+  	$('#togglePassword').on('click', function () {
+    	const passwordInput = $('#floatingPassword');
+    	const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+    	passwordInput.attr('type', type);
+
+    	// 切換按鈕圖示
+    	const icon = $(this).find('i');
+    	icon.toggleClass('bi-eye bi-eye-slash');
+  	});
+  	
+  	//vvvvvvvvv開發者測試功能vvvvvvvvv
+  	// 測試帳密
+    const devTestAccount = "aizensosukeHADONO90@gmail.com";
+    const devTestPassword = "Ab000000";
+
+    // 點擊按鈕自動填入帳密
+    $('#devFillButton').on('click', function () {
+        $('#floatingInput').val(devTestAccount); // 填入帳號
+        $('#floatingPassword').val(devTestPassword); // 填入密碼
+    });
+    //^^^^^^^^^正式上線要刪除^^^^^^^^^
+           
       $.ajax({
         url: '/api/check-login',  // 检查用户登录状态的 API
         method: 'GET',
@@ -190,13 +277,14 @@
                 // 点击对话框的确定按钮后，跳转到 memberCenter 页面
                 $('#confirmRedirect').on('click', function () {
                     window.location.href = '/memberCenter';  // 已登录用户跳转到用户中心
+                    
                 });
             }
         },
         error: function () {
             console.error('Error checking login status.');
         }
-    });
+    	});
         
         // 点击登录页面链接时，如果已登录，显示提示框并阻止默认跳转
     $('#loginPageLink').on('click', function (e) {
@@ -243,6 +331,9 @@
           success: function (response) {
             if (response === 'success') {
               window.location.href = '/memberCenter'; // 登入成功後跳轉
+            
+            
+                        
             } else {
               var modal = new bootstrap.Modal(document.getElementById('loginErrorModal'));
               modal.show();
@@ -258,6 +349,9 @@
       document.getElementById('registerButton').addEventListener('click', function () {
         window.location.href = '/register';
       });
+    
+    	
+
     });
   </script>
 </body>
