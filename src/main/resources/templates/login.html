@@ -139,23 +139,7 @@
     </form>
   </main>
 
-<!-- 已登入提示 -->
-<div class="modal fade" id="alreadyLoggedInModal" tabindex="-1" aria-labelledby="alreadyLoggedInModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="alreadyLoggedInModalLabel">已登入</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        您已經登入，將會自動跳轉到會員中心。
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="confirmRedirect">確定</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
    <!-- 錯誤模態框 -->
   <div class="modal fade" id="loginErrorModal" tabindex="-1" aria-labelledby="loginErrorModalLabel" aria-hidden="true">
@@ -175,23 +159,7 @@
     </div>
   </div>
 
-  <!-- 登出成功的模態框 -->
-  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="logoutModalLabel">登出成功</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          您已成功登出系統。
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <div class="col-md-4 d-flex align-items-center">
@@ -273,10 +241,11 @@
         e.preventDefault();
 
         var userEmail = $('#floatingInput').val().trim();
-        var userPassword = $('#floatingPassword').val().trim();
-
+        var userPassword = $('#floatingPassword').val().trim();		
+		//檢查用戶的電子郵件和密碼是否為空。如果任一值為空，則進行提示並終止後續操作。
         if (!userEmail || !userPassword) {
-            alert('請填寫所有欄位');
+            //顯示彈出提示框，提醒用戶補全所有必填欄位。
+            alert('請填寫所有欄位');//這邊要改掉原生顯示
             return;
           }
 
@@ -301,7 +270,8 @@
           }
         });
       });
-
+		
+		//用button建立立即註冊按鈕，用JS導向。
       document.getElementById('registerButton').addEventListener('click', function () {
         window.location.href = '/register';
       });

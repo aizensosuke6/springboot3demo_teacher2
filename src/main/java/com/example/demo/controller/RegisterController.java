@@ -16,15 +16,21 @@ import com.example.demo.model.RegisterBean;
 
 import com.example.demo.service.RegisterService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class RegisterController {
 	
 	@Autowired
 	private RegisterService registerService;
 	
-	// 顯示註冊頁面
+	// 顯示註冊頁面，重定向邏輯。
     @GetMapping("/register")
-    public String showRegisterPage() {
+    public String showRegisterPage(HttpSession session) {
+    	// 檢查 session 中是否有 user 資料（已登入）。
+    	if(session.getAttribute("user") != null) {
+    		return "redirect:/memberCenter";// 可以根據需求修改重定向的頁面
+    	}
         return "register";  // 返回register.html頁面
     }
 	

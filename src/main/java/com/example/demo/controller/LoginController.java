@@ -71,7 +71,7 @@ public class LoginController {
     }
     
     //登出
-    @GetMapping("/logout")
+    @PostMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		// 獲取當前 session，false 表示如果 session 不存在則不創建新的 session
 		HttpSession session = request.getSession(false);
