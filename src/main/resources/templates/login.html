@@ -265,53 +265,9 @@
     });
     //^^^^^^^^^正式上線要刪除^^^^^^^^^
            
-      $.ajax({
-        url: '/api/check-login',  // 检查用户登录状态的 API
-        method: 'GET',
-        success: function (isLoggedIn) {
-            if (isLoggedIn) {
-                // 如果已登录，显示提示对话框
-                var modal = new bootstrap.Modal(document.getElementById('alreadyLoggedInModal'));
-                modal.show();
-
-                // 点击对话框的确定按钮后，跳转到 memberCenter 页面
-                $('#confirmRedirect').on('click', function () {
-                    window.location.href = '/memberCenter';  // 已登录用户跳转到用户中心
-                    
-                });
-            }
-        },
-        error: function () {
-            console.error('Error checking login status.');
-        }
-    	});
+      
         
-        // 点击登录页面链接时，如果已登录，显示提示框并阻止默认跳转
-    $('#loginPageLink').on('click', function (e) {
-        // 先通过 AJAX 检查用户是否已登录
-        $.ajax({
-            url: '/api/check-login',  // 检查用户登录状态的 API
-            method: 'GET',
-            success: function (isLoggedIn) {
-                if (isLoggedIn) {
-                    // 如果已登录，显示提示对话框
-                    var modal = new bootstrap.Modal(document.getElementById('alreadyLoggedInModal'));
-                    modal.show();
-                    
-                    // 点击对话框的确定按钮后，跳转到 memberCenter 页面
-                    $('#confirmRedirect').on('click', function () {
-                        window.location.href = '/memberCenter';  // 跳转到用户中心
-                    });
-
-                    // 阻止页面跳转
-                    e.preventDefault();
-                }
-            },
-            error: function () {
-                console.error('Error checking login status.');
-            }
-        });
-    });
+    
         
       $('#loginForm').on('submit', function (e) {
         e.preventDefault();

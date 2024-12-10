@@ -22,11 +22,16 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    // 顯示登入頁面
+    // 顯示登入頁面，重定向邏輯。
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(HttpSession session) {
+    	// 檢查 session 中是否有 user 資料，表示用戶已經登入
+    	if(session.getAttribute("user") != null) {
+    		// 如果已經登入，重定向到首頁（或其他頁面）
+    		return "redirect:/memberCenter";// 可以根據需求修改重定向的頁面
+    	}
     	
-    	
+    	// 如果沒有登入，顯示登入頁面
     	return "login";  // 返回login.html頁面
     }
 
