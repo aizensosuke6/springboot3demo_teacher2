@@ -27,7 +27,16 @@ public class LoginBean {
 
 	@Column(name = "userBirthday")
 	private String userBirthday;
-
+	
+	@Column(name = "userStatus")
+	private int userStatus;
+	
+	@Transient
+	private String status;
+	
+	@Transient
+	private String message;
+	
 	// 無參構造函數（JPA 要求）
 	public LoginBean() {
 	}
@@ -89,5 +98,29 @@ public class LoginBean {
 	public void setUserBirthday(String userBirthday) {
 		this.userBirthday = userBirthday;
 	}
+	
+	public int getUserStatus() {
+		return userStatus;
+	}
 
+	public void setUserStatus(int userStatus) {
+		this.userStatus = userStatus;
+	}
+	
+	public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+	
 }

@@ -31,6 +31,9 @@ public class RegisterBean {
     @Column(name = "userBirthday")
     private String userBirthday;
 
+    @Column(name = "userStatus")
+	private int userStatus;
+    
 	public int getUserId() {
 		return userId;
 	}
@@ -87,7 +90,12 @@ public class RegisterBean {
 		this.userBirthday = userBirthday;
 	}
 	
-	
-	
+	public int getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(int userStatus) {
+		this.userStatus = userStatus;
+	}
 	
 }

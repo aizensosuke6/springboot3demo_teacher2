@@ -2,10 +2,13 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,16 +42,38 @@ public class LoginController {
  // 用戶登入處理
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<String> login(@RequestParam String userEmail, @RequestParam String userPassword, HttpSession session) {
-        // 驗證登入
+    public ResponseEntity<String> login(@RequestBody LoginBean loginDetails, HttpSession session) {
+        String userEmail = loginDetails.getUserEmail();
+        String userPassword = loginDetails.getUserPassword();
+    	
+    	// 驗證登入
         LoginBean user = loginService.authenticate(userEmail, userPassword);
-
-        if (user != null) {
+        
+        // 返回給前端的簡化消息
+        String messageToFrontend = "";
+        
+        if("success".equals(user.getStatus())) {
         	// 登入成功，將用戶信息放入 session
-            session.setAttribute("user", user);
-            return ResponseEntity.ok("success");  // 登入成功
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("failure");  // 登入失敗
+        	session.setAttribute("user", user);
+        	messageToFrontend = "{\"status\":\"success\",\"message\":\"登入成功.\"}";
+        	return ResponseEntity.status(HttpStatus.OK).body(messageToFrontend);
+        }else {
+        	// 根據後端的詳細錯誤訊息，決定簡化後的前端訊息
+        	switch(user.getMessage()) {
+        	case "帳號不存在":
+        		messageToFrontend = "{\"status\":\"fail\",\"message\":\"帳號或密碼錯誤.\"}";
+                break;
+        	case "帳號未啟用":
+                messageToFrontend = "{\"status\":\"fail\",\"message\":\"帳號未啟用.\"}";
+                break;
+            case "帳號或密碼錯誤":
+                messageToFrontend = "{\"status\":\"fail\",\"message\":\"帳號或密碼錯誤.\"}";
+                break;
+            default:
+                messageToFrontend = "{\"status\":\"fail\",\"message\":\"未知錯誤.\"}";
+                break;
+        	}
+        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageToFrontend);
         }
     }
     
@@ -61,12 +86,14 @@ public class LoginController {
  // 獲取用戶資訊
     @GetMapping("/getUserInfo")
     @ResponseBody
-    public ResponseEntity<String> getUserInfo(HttpSession session) {
+    public String getUserInfo(HttpSession session) {
         LoginBean user = (LoginBean) session.getAttribute("user");
         if (user != null) {
-            return ResponseEntity.ok("{\"success\": true, \"username\": \"" + user.getUserName() + "\", \"userEmail\": \"" + user.getUserEmail() + "\"}");
+        	// 返回用戶信息的 JSON 格式
+            return "{\"success\": true, \"username\": \"" + user.getUserName() + "\", \"userEmail\": \"" + user.getUserEmail() + "\"}";
         } else {
-            return ResponseEntity.ok("{\"success\": false}");
+        	// 用戶未登入，返回失敗的 JSON 格式
+            return "{\"success\": false, \"message\": \"User is not logged in.\"}";
         }
     }
     

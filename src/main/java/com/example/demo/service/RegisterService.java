@@ -77,6 +77,9 @@ public class RegisterService {
 		String encryptedPassword = passwordEncoder.encode(user.getUserPassword());
 		user.setUserPassword(encryptedPassword);// 將加密後的密碼設置回 user 對象
 		
+		// 設定 userStatus 為 1（已啟用）
+        user.setUserStatus(1); // 預設帳號為啟用狀態
+		
 		// 使用 save() 方法將註冊資料儲存到資料庫
 		registerRepository.save(user);
 		// 註冊成功後打印訊息
