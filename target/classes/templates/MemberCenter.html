@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Spring Security CSRF token -->
-    <meta name="_csrf" content="${_csrf.token}">
+    
     
     <title>歡迎頁面</title>
 <!-- 導入Bootstrap -->
@@ -113,7 +113,7 @@ body {
     <br>
     <!-- 登出成功提示框 -->
 	<div id="logoutAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-  	登出成功！1.5秒後重定向至登入頁面。
+  	登出成功！0.5秒後重定向至登入頁面。
 	</div>
     <br>
     
@@ -147,24 +147,21 @@ body {
         $('#logoutButton').click(function (e) {
             e.preventDefault(); // 防止頁面跳轉
             
-            // 取得 CSRF Token（若有設置）
-            var csrfToken = $('meta[name="_csrf"]').attr('content');
+            
           
             // 發送 POST 請求登出
             $.ajax({
                 url: '/logout', // 確保你的登出控制器在這個路徑
                 type: 'POST', // 使用 POST 請求登出
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken // 添加 CSRF Token 防止 CSRF 攻擊
-                },
+                
                 success: function(response) {
                     // 登出成功後，顯示登出成功提示
                     $('#logoutAlert').fadeIn();
                     
-                    // 設置一個計時器，在顯示提示框 3 秒後跳轉到登入頁面
+                    // 設置一個計時器，在顯示提示框 0.5 秒後跳轉到登入頁面
                     setTimeout(function(){
                     window.location.href = '/login';
-                    }, 1500);// 1.5秒後跳轉                   
+                    }, 500);// 0.5秒後跳轉                   
                 },
                 error: function() {
                     // 失敗處理，這裡你可以顯示錯誤信息

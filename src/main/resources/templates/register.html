@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>會員註冊頁面</title>
 
 <!-- 導入Bootstrap -->
@@ -214,9 +215,11 @@ body {
 		
         // ----vv發送AJAX請求到後端vv----
         
+        
         $.ajax({
     		url: '/api/register',
     		type: 'POST',
+    		
     		contentType: 'application/json',
     		dataType: 'json',
     		data: JSON.stringify(formData), // 發送的資料

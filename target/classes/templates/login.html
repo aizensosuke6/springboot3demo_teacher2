@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <title>會員登入</title>
 
   <!-- 導入Bootstrap -->
@@ -155,11 +156,27 @@
       <!--^^正式上線要刪除^^-->
       
       <br>
+      <div>
       <button class="w-100 btn btn-lg btn-warning" type="submit">登入</button>
+      </div>
+      
+      <br>
+      <div>
+      <!-- Google-like pure color button -->
+	  <button type="button" id="googleLoginBtn" class="w-100 btn btn-lg" style="background-color: #4285F4; color: white; border: none; display: flex; justify-content: center; align-items: center;">
+  	  <span style="font-size: 20px; margin-right: 10px;">G</span> 
+  	  使用 Google 登入
+	  </button>
+	  </div>
+	       
       <hr>
       <button class="w-100 btn btn-lg btn-warning" type="button" id="registerButton">立即註冊</button>
+      
       <p class="mt-5 mb-3 text-muted">&copy; 2022 Company, Inc</p>
     </form>
+   
+    
+	
   </main>
 
 
@@ -291,10 +308,12 @@
     // 收集表單數據
   	const userEmail = emailInput.val().trim();
   	const userPassword = passwordInput.val().trim();    
+    
       
     $.ajax({
     url: '/login',
     method: 'POST',
+    
     contentType: 'application/json',
     data: JSON.stringify({ userEmail: userEmail, userPassword: userPassword }),
     success: function(response) {
@@ -344,6 +363,11 @@
 		//用button建立立即註冊按鈕，用JS導向。
       document.getElementById('registerButton').addEventListener('click', function () {
         window.location.href = '/register';
+      });
+      
+      	//用button建立Google登入按鈕，用JS導向。
+      document.getElementById('googleLoginBtn').addEventListener('click', function () {
+        window.location.href = '/oauth2/authorization/google';
       });
 	});
 </script>
