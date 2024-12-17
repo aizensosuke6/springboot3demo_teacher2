@@ -1,14 +1,14 @@
-2024/12/10 新增
+2024/12/13 新增
 ChiikawaGame
 新增:
-1.使用安全的POST登出PostMapping
-2.將註冊頁面的重定向功能從前端移到後端
-3.刪除無用的401View.html
-4.刪除login.html的已登入提示框與登出成功提示框
-5.memberCenter.html加上CSRF設置，登出成功提示框，POST登出。
+1.登入系統重構，使用JSON格式傳接，新增帳號狀態判斷。
+2.Login Register Bean類更新
+3.LoginService重構 與 新增帳號狀態判斷
+4.RegisterService新增預設寫入帳號狀態1
+5.Login.html因應以上4點更動，修改完畢。
 
 已知BUG:
 1.無
 
 已解決BUG:
-1.註冊成功後馬上跳轉至登入頁面，刷新太快，看了眼睛不舒服。
+1.無
