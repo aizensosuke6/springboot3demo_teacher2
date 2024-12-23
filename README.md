@@ -1,13 +1,29 @@
-2024/12/17 新增
 ChiikawaGame
+
+2024/12/23
+
 新增:
-1.pom.xml新增OAuth2登入必備套件
-2.新增SecurityConfig，用於處理OAuth2登入。
-3.新增Google OAuth2 登入方式，登入後包成session，共用AJAX登入處理session的控制器。
-4.application.properties 新增 Google OAuth2 必備指令(測試用帳號直接傳到GitHub沒差)
-5.Login.html新增 使用Google登入 的按鈕
-6.刪除memberCenter的CSRF防護(之後視情況加上)
-7.無
+
+1.新增員工登入頁面
+
+2.註冊添加顯示密碼
+
+3.生日用日曆的方式選擇
+
+4.未登入時禁止造訪會員中心
+
+5.新增本地註冊加入帳號狀態1
+
+6.新增本地註冊加入註冊方式LOCAL
+
+7.新增首次GOOGLE登入時，新增新帳號到資料庫。
+
+8.修改GOOGLE登入部分邏輯
+
+9.新增Bean類映射項目
+
+10.新增管理員登入控制器
+
 已知BUG:
 1.目前關閉CSRF防護中，之後視情況是否開啟。
 
