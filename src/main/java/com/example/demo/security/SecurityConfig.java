@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.demo.model.LoginBean;
-import com.example.demo.repository.LoginRepository;
+
 import com.example.demo.service.LoginService;
 
 import jakarta.servlet.http.HttpSession;

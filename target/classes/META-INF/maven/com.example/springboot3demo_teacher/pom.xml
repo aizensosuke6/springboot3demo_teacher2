@@ -76,7 +76,7 @@
 		</dependency>
 		
 		<!-- OAuth2 Client Dependency -->			
-			<dependency>
+		<dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
@@ -85,6 +85,8 @@
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		
+		<!-- reCAPTCHA需要spring-boot-starter-web -->
 							
 	</dependencies>
 

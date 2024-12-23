@@ -3,15 +3,21 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+
 import com.example.demo.model.RegisterBean;
 import com.example.demo.repository.RegisterRepository;
 
 @Service
 public class RegisterService {
-
+	
+	
+	
 	@Autowired
 	private RegisterRepository registerRepository;
 	
@@ -23,7 +29,8 @@ public class RegisterService {
 	
 	public List<String> registerUser(RegisterBean user){
 		List<String> errors = new ArrayList<>();
-	
+		
+		
 	
 	 
 		// 資料驗證（簡單檢查空值）
@@ -94,6 +101,8 @@ public class RegisterService {
 				
 				
 	}
+	
+	
 	
 
 

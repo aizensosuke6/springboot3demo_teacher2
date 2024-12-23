@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,11 @@ public class RegisterController {
 	@Autowired
 	private RegisterService registerService;
 	
+	
 	// 顯示註冊頁面，重定向邏輯。
     @GetMapping("/register")
     public String showRegisterPage(HttpSession session) {
+    	
     	// 檢查 session 中是否有 user 資料（已登入）。
     	if(session.getAttribute("user") != null) {
     		return "redirect:/memberCenter";// 可以根據需求修改重定向的頁面
@@ -49,4 +49,6 @@ public class RegisterController {
         // 若註冊成功，重定向到登入頁面
         return "redirect:/login";
     }
+    
+ 
 }
