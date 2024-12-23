@@ -8,12 +8,21 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.demo.model.LoginBean;
+import com.example.demo.repository.LoginRepository;
+import com.example.demo.service.LoginService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	private final LoginService loginService;
+
+	 // 注入 LoginService
+    public SecurityConfig(LoginService loginService) {
+        this.loginService = loginService;
+    }
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -30,34 +39,37 @@ public class SecurityConfig {
         			String email = oauth2User.getAttribute("email");
         			String name = oauth2User.getAttribute("name");
         			
-        			// 將用戶資訊包裝成 LoginBean
-        			LoginBean userBean = new LoginBean();
-        			userBean.setUserEmail(email);
-        			userBean.setUserName(name);
-        			userBean.setStatus("success");
+        			
+        			// 在控制台輸出用戶資訊
+        		    System.out.println("Email: " + email);
+        		    System.out.println("Name: " + name);
+        		    
+        		    
+        		 // 使用 LoginService 處理 Google 登入
+                    LoginBean user = loginService.handleGoogleLogin(email, name);
+        			
+                 
+        			
+        			user.setUserEmail(email);
+        			user.setUserName(name);
+        			user.setStatus("success");
         			
         			// 存入 Session
         			HttpSession session = request.getSession();
-        			session.setAttribute("user", userBean);
+        			session.setAttribute("user", user);
         			
         			// 重定向到會員中心
         			response.sendRedirect("/memberCenter");
-        			
-        			
-        			
-        			
-        			
+                    
+                    
+                    
             })
-        )
-     
-     // 登出設定
-        .logout(logout -> logout
-        	.logoutUrl("/logout")
-            .logoutSuccessUrl("/login")  // 登出後跳轉到登入頁面
-            .invalidateHttpSession(true)  // 清除 Session
         );
+     
+     
     
     return http.build();
 	}
-
+	
+	
 }

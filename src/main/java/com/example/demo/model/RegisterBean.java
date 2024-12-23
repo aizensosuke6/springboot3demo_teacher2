@@ -34,6 +34,9 @@ public class RegisterBean {
     @Column(name = "userStatus")
 	private int userStatus;
     
+	@Column(name = "loginType")
+	private String loginType;
+    
 	public int getUserId() {
 		return userId;
 	}
@@ -96,6 +99,14 @@ public class RegisterBean {
 
 	public void setUserStatus(int userStatus) {
 		this.userStatus = userStatus;
+	}
+	
+    public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
 	}
 	
 }
