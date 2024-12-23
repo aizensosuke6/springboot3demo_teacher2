@@ -1,14 +1,15 @@
-2024/12/13 新增
+2024/12/17 新增
 ChiikawaGame
 新增:
-1.登入系統重構，使用JSON格式傳接，新增帳號狀態判斷。
-2.Login Register Bean類更新
-3.LoginService重構 與 新增帳號狀態判斷
-4.RegisterService新增預設寫入帳號狀態1
-5.Login.html因應以上4點更動，修改完畢。
-
+1.pom.xml新增OAuth2登入必備套件
+2.新增SecurityConfig，用於處理OAuth2登入。
+3.新增Google OAuth2 登入方式，登入後包成session，共用AJAX登入處理session的控制器。
+4.application.properties 新增 Google OAuth2 必備指令(測試用帳號直接傳到GitHub沒差)
+5.Login.html新增 使用Google登入 的按鈕
+6.刪除memberCenter的CSRF防護(之後視情況加上)
+7.無
 已知BUG:
-1.無
+1.目前關閉CSRF防護中，之後視情況是否開啟。
 
 已解決BUG:
 1.無
