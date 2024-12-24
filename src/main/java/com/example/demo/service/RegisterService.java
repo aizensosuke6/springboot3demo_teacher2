@@ -87,9 +87,9 @@ public class RegisterService {
 		// 設定 userStatus 為 1（已啟用）
 		// 設定 LoginType 為 LOCAL
         user.setUserStatus(1);	//預設帳號為啟用狀態
-        user.setLoginType("LOCAL");	//用此註冊方式，值設定為LOCAL。
+        //user.setLoginType("LOCAL");	//用此註冊方式，值設定為LOCAL。
         System.out.println("設置帳號啟用狀態：" + user.getUserStatus());
-        System.out.println("設置登入方式：" + user.getLoginType());
+        //System.out.println("設置登入方式：" + user.getLoginType());
 		
 		// 使用 save() 方法將註冊資料儲存到資料庫
 		registerRepository.save(user);
