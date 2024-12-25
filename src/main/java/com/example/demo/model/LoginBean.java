@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -40,6 +42,12 @@ public class LoginBean {
 	@Transient
 	private String message;
 	
+	@Column(name = "resetToken")
+	private String resetToken;
+	
+	@Column(name = "tokenExpiry")
+    private LocalDateTime tokenExpiry;
+
 	// 無參構造函數（JPA 要求）
 	public LoginBean() {
 	}
@@ -132,6 +140,22 @@ public class LoginBean {
 
 	public void setLoginType(String loginType) {
 		this.loginType = loginType;
+	}
+	
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
+
+	public LocalDateTime getTokenExpiry() {
+		return tokenExpiry;
+	}
+
+	public void setTokenExpiry(LocalDateTime tokenExpiry) {
+		this.tokenExpiry = tokenExpiry;
 	}
 	
 }

@@ -87,6 +87,13 @@
 		</dependency>
 		
 		<!-- reCAPTCHA需要spring-boot-starter-web -->
+		
+		<!-- JavaMailSender -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 							
 	</dependencies>
 
