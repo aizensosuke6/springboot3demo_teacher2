@@ -1,32 +1,16 @@
 ChiikawaGame
 
-2024/12/26
+2024/12/27
 
-1.pom檔新增JavaMailSender
+最後一版
 
-2.新增PasswordController
+新增:
 
-3.新增PasswordPageController
+1.忘記密碼找回密碼改成JSON傳接
 
-4.忘記密碼Bean類
+2.忘記密碼找回密碼前端製作與美化
 
-5.LoginBean類新增Token相關
-
-6.重設密碼Bean類
-
-7.LoginRepository新增findByResetToken
-
-8.EmailTest測試用(可以直接無視)
-
-9.PasswordResetService
-
-10.application.properties新增Email SMTP 設定<-注意!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-11.忘記密碼前端頁面
-
-12.重設密碼前端頁面
-
-13.硬掉的肝
+3.login.html新增忘記密碼
 
 已知BUG:
 
@@ -38,6 +22,4 @@ ChiikawaGame
 
 提醒:
 
-1.記得刪除key
-
-2.前端要美化
+1.設定新密碼要加上正則表示法
