@@ -69,7 +69,7 @@ public class LoginService {
             user.setUserEmail(email);
             user.setUserName(name);
             user.setUserStatus(1);	//預設帳號為啟用狀態
-            user.setLoginType("GOOGLE");	//用此註冊方式，值設定為GOOGLE。
+          //user.setLoginType("GOOGLE");//用此註冊方式，值設定為GOOGLE。
             user.setStatus("success");
             user.setMessage("用戶資料創建成功");
             loginRepository.save(user);

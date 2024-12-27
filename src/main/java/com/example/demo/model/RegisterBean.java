@@ -33,9 +33,6 @@ public class RegisterBean {
 
     @Column(name = "userStatus")
 	private int userStatus;
-    
-	@Column(name = "loginType")
-	private String loginType;
 	
 	// 新增的 reCAPTCHA 欄位
     @Transient  // @Transient 用來告訴 JPA 這個欄位不要映射到資料庫
@@ -103,14 +100,6 @@ public class RegisterBean {
 
 	public void setUserStatus(int userStatus) {
 		this.userStatus = userStatus;
-	}
-	
-    public String getLoginType() {
-		return loginType;
-	}
-
-	public void setLoginType(String loginType) {
-		this.loginType = loginType;
 	}
 	
 	public String getRecaptchaResponse() {
