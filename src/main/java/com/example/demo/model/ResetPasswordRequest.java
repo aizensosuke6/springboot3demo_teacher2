@@ -3,8 +3,9 @@ package com.example.demo.model;
 public class ResetPasswordRequest {
     private String token;
     private String newPassword;
+    
 
-    // Getter 和 Setter
+	// Getter 和 Setter
     public String getToken() {
         return token;
     }
@@ -20,4 +21,7 @@ public class ResetPasswordRequest {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
+    
+    
+	
 }

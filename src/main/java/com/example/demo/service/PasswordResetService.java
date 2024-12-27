@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
 import java.time.LocalDateTime;
+
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.LoginBean;
 import com.example.demo.repository.LoginRepository;
+
 
 
 
@@ -63,5 +66,3 @@ public class PasswordResetService {
     }
     
 }
-
-

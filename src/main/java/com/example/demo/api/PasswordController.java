@@ -13,6 +13,9 @@ import com.example.demo.model.EmailRequest;
 import com.example.demo.model.ResetPasswordRequest;
 import com.example.demo.service.PasswordResetService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/password")
 public class PasswordController {
@@ -22,23 +25,33 @@ public class PasswordController {
 
     // 處理用戶提交忘記密碼請求
     @PostMapping("/forgot")
-    public ResponseEntity<String> forgotPassword(@RequestBody EmailRequest emailRequest) {
+    public ResponseEntity<Map<String, Object>> forgotPassword(@RequestBody EmailRequest emailRequest) {
         boolean emailSent = passwordResetService.sendResetPasswordLink(emailRequest.getEmail());
+        Map<String, Object> response = new HashMap<>();
         if (emailSent) {
-            return ResponseEntity.ok("重設密碼連結已發送到您的電子郵箱！");
+            response.put("success", true);
+            response.put("message", "重設密碼連結已發送到您的電子郵箱！");
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("該電子郵件未註冊！");
+            response.put("success", false);
+            response.put("message", "該電子郵件未註冊！");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
     
     // 處理用戶提交的新密碼請求
     @PutMapping("/reset")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+    public ResponseEntity<Map<String, Object>> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
         boolean resetSuccessful = passwordResetService.resetPassword(resetPasswordRequest.getToken(), resetPasswordRequest.getNewPassword());
+        Map<String, Object> response = new HashMap<>();
         if (resetSuccessful) {
-            return ResponseEntity.ok("密碼重設成功！");
+            response.put("success", true);
+            response.put("message", "密碼重設成功！");
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("無效或過期的重設令牌！");
+            response.put("success", false);
+            response.put("message", "無效或過期的重設令牌！");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 }

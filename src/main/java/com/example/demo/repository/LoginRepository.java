@@ -13,4 +13,6 @@ public interface LoginRepository extends JpaRepository<LoginBean, Integer> {
 	LoginBean findByUserEmail(String userEmail);
 
 	LoginBean findByResetToken(String token);
+	
+    
 }
